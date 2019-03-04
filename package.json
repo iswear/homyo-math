@@ -1,0 +1,11 @@
+{
+  "name": "homyo-math",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "iswear",
+  "license": "ISC"
+}
