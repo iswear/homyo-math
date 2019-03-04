@@ -2,10 +2,23 @@
   "name": "homyo-math",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "./lib/main.js",
   "scripts": {
-    "test": "test"
+    "test": "webpack --env.profile=test",
+    "build": "webpack --env.profile=build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iswear/homyo-math.git"
   },
   "author": "iswear",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iswear/homyo-math/issues"
+  },
+  "homepage": "https://github.com/iswear/homyo-math#readme",
+  "dependencies": {
+    "lodash": "^4.17.11",
+    "webpack": "^3.5.3"
+  }
 }
