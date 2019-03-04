@@ -1,6 +1,6 @@
 
 export default {
-  newton: function (params, ) {
+  newton: function (params, result, precision) {
 
   }
 }
