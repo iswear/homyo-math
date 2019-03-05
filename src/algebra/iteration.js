@@ -1,19 +1,29 @@
 
 export default (function () {
-  function newton (params, result, soln, precision) {
+  function newton (params, soln, precision, step) {
     var devParams = []
     for (var i = 0, len = params.length - 1; i < len; ++i) {
       devParams.push(params[i] * i)
     }
-    var delta, calResult, solnPow = [1]
-    do {
-      calResult = 0
+    var result = 0, solnPow = [1], count = 0, slope = 0
+    while (true) {
+      result = 0
       for (var i = 0, len = params.length; i < len; ++i) {
-        calResult += solnPow[i] * params[i]
+        result += solnPow[i] * params[i]
         solnPow[i + 1] = solnPow[i] * soln
       }
-      delta = Math.abs(calResult - result)
-    } while (delta > precision)
+      if (Math.abs(result) < precision) {
+        break
+      }
+      if (++count >= step) {
+        break
+      }
+      slope = 0
+      for (var i = 0, len = devParams.length; i < len; ++i) {
+        slope += solnPow[i] * devParams[i]
+      }
+      soln = slope === 0 ? (soln + precision) : (soln - result / slope)
+    }
     return soln
   }
 
