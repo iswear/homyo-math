@@ -35,6 +35,13 @@ export default (function () {
     ]
   }
 
+  function convertVector2D (mat, vector) {
+    return [
+      mat[0] * vector[0] + mat[1] * vector[1] + mat[2],
+      mat[3] * vector[0] + mat[4] * vector[1] + mat[5]
+    ] 
+  }
+
   function translate2D (mat, x, y) {
     return [
       mat[0],
