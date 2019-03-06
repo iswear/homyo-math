@@ -12,10 +12,7 @@ export default (function () {
         result += solnPow[i] * params[i]
         solnPow[i + 1] = solnPow[i] * soln
       }
-      if (Math.abs(result) < precision) {
-        return soln
-      }
-      if (++count >= step) {
+      if (Math.abs(result) < precision || ++count >= step) {
         return soln
       }
       slope = 0

@@ -17,21 +17,16 @@
           result += solnPow[i] * params[i]
           solnPow[i + 1] = solnPow[i] * soln
         }
-        if (Math.abs(result) < precision) {
-          break
-        }
-        if (++count >= step) {
-          break
+        if (Math.abs(result) < precision || ++count >= step) {
+          return soln
         }
         slope = 0
         for (var i = 0, len = devParams.length; i < len; ++i) {
           slope += solnPow[i] * devParams[i]
         }
         soln = slope === 0 ? (soln + precision) : (soln - result / slope)
-        console.log('feafe', soln)
       }
-      return soln
-    } 
+    }
 
     var params = [1, 2, 1]
     console.log(newton(params, 10000, 0.0001, 100))
