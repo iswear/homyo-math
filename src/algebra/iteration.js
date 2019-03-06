@@ -13,10 +13,10 @@ export default (function () {
         solnPow[i + 1] = solnPow[i] * soln
       }
       if (Math.abs(result) < precision) {
-        break
+        return soln
       }
       if (++count >= step) {
-        break
+        return soln
       }
       slope = 0
       for (var i = 0, len = devParams.length; i < len; ++i) {
@@ -24,7 +24,6 @@ export default (function () {
       }
       soln = slope === 0 ? (soln + precision) : (soln - result / slope)
     }
-    return soln
   }
 
   return {
