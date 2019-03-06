@@ -1,6 +1,6 @@
 
 export default (function () {
-  function newIdentityMat2D () {
+  function newMat2D () {
     return [
       1, 0, 0,
       0, 1, 0
@@ -18,7 +18,10 @@ export default (function () {
   }
 
   function copyMat2D (src, des) {
-    for (var i = 0, len = des.length; i < len; ++i) {
+    if (!des) {
+      des = []
+    }
+    for (var i = 0, len = src.length; i < len; ++i) {
       des[i] = src[i]
     }
     return des
@@ -35,7 +38,7 @@ export default (function () {
     ]
   }
 
-  function convertVector2D (mat, vector) {
+  function transformVector2D (mat, vector) {
     return [
       mat[0] * vector[0] + mat[1] * vector[1] + mat[2],
       mat[3] * vector[0] + mat[4] * vector[1] + mat[5]
@@ -100,7 +103,7 @@ export default (function () {
     ]
   }
 
-  function newIdentityMat3D () {
+  function newMat3D () {
     return [
       1, 0, 0, 0,
       0, 1, 0, 0,
@@ -130,10 +133,13 @@ export default (function () {
   }
 
   function copyMat3D (src, des) {
-    for (var i = 0, len = srcMat.length; i < len; ++i) {
-      desMat[i] = srcMat[i];
+    if (!des) {
+      des = []
     }
-    return desMat;
+    for (var i = 0, len = src.length; i < len; ++i) {
+      des[i] = src[i];
+    }
+    return des;
   }
 
   function multiplyMat3D (mat1, mat2) {
@@ -157,7 +163,7 @@ export default (function () {
     ];
   }
 
-  function convertVector3D (mat, vect) {
+  function transformVector3D (mat, vect) {
     return [
       mat1[0] * mat2[0] + mat1[1] * mat2[1] + mat1[2] * mat2[2] + mat1[3] * mat2[3],
       mat1[4] * mat2[0] + mat1[5] * mat2[1] + mat1[6] * mat2[2] + mat1[7] * mat2[3],
@@ -297,7 +303,7 @@ export default (function () {
     return mat1;
   }
 
-  function lookAt (mat, eye, look, up) {
+  function lookAt3D (mat, eye, look, up) {
     var n = [eye[0] - look[0], eye[1] - look[1], eye[2] - look[2]];
     var u = [up[1] * n[2] - up[2] * n[1], up[2] * n[0] - up[0] * n[2], up[0] * n[1] - up[1] * n[0]];
     var v = [n[1] * u[2] - n[2] * u[1], n[2] * u[0] - n[0] * u[2], n[0] * u[1] - n[1] * u[0]];
@@ -336,10 +342,29 @@ export default (function () {
 
   return {
     m2d: {
-
+      new: newMat2D,
+      reset: resetMat2D,
+      copy: copyMat2D,
+      multiply: multiplyMat2D,
+      transformVector: transformVector2D,
+      translate: translate2D,
+      scale: scale2D,
+      shear: shear2D,
+      rotate: rotate2D,
+      reverse: reverse2D
     },
     m3d: {
-
+      new: newMat3D,
+      reset: resetMat3D,
+      copy: copyMat3D,
+      multiply: multiplyMat3D,
+      transformVector: transformVector3D,
+      translate: translate3D,
+      scale: scale3D,
+      shear: shear3D,
+      rotate: rotate3D,
+      lookAt: lookAt3D,
+      reverse: reverse3D 
     }
   }
 })()
