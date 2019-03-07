@@ -4,7 +4,7 @@
   </head>
 
   <body>
-    <canvas width="600" height="500" id="canvas"></canvas>
+    <canvas width="600" height="500" id="canvas" style="background-color: green"></canvas>
     <script>
     // function newton (params, soln, precision, step) {
     //   var devParams = []
@@ -32,16 +32,22 @@
     // var params = [1, 2, 1]
     // console.log(newton(params, 10000, 0.0001, 100))
       
-      var canvas = document.getElementById("canvas");
-      var context = canvas.getContext("2d");
-      context.beginPath();
-      context.moveTo(10, 10);
-      context.lineTo(20, 20);
-      context.stroke();
-      context.fillStyle="#f00";
-      context.fillRect(15, 15, 300, 300);
-      context.lineTo(0, 100);
-      context.stroke();
+      // var canvas = document.getElementById("canvas");
+      // var context = canvas.getContext("2d");
+      // context.beginPath();
+      // context.moveTo(10, 10);
+      // context.lineTo(200, 200);
+      // context.lineTo(100, 200);
+      // context.closePath();
+      // context.stroke();
+      // context.fillStyle="#f00";
+      // context.fillRect(15, 15, 300, 300);
+      // context.lineTo(0, 100);
+      // context.stroke();
+
+      var div = document.createElement("div");
+      console.log(div)
+      console.log(div.outerHTML);
     </script>
   </body>
 </html>
