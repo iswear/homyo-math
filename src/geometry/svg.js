@@ -143,7 +143,6 @@ export default (function () {
     this.context.curPath.commands.push('S' + arr.join(' '));
   }
 
-
   svg.prototype.quadraticBelzierCurveTo = function (x1, y1, x, y) {
     var arr = [x1, y1, x, y];
     this.context.curPath.commands.push('Q' + arr.join(' '));
