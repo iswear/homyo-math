@@ -1,15 +1,15 @@
 
 export default (function () {
-  function svg () {
+  function Svg () {
     this.elements = []
     this.context = {curPath: null}
   }
 
-  svg.prototype.createSvgTag = function (tagName) {
+  Svg.prototype.createSvgTag = function (tagName) {
     return document.createElementNS('http://www.w3.org/2000/svg', tagName);
   }
 
-  svg.prototype.rect = function (x, y, width, height, style) {
+  Svg.prototype.rect = function (x, y, width, height, style) {
     this.elements.push({
       tag: 'rect',
       attribute: {
@@ -23,7 +23,7 @@ export default (function () {
     return this;
   }
 
-  svg.prototype.circle = function (x, y, radius, style) {
+  Svg.prototype.circle = function (x, y, radius, style) {
     this.elements.push({
       tag: 'circle',
       attribute: {
@@ -36,7 +36,7 @@ export default (function () {
     return this;
   }
 
-  svg.prototype.ellipse = function (x, y, radiusX, radiusY, style) {
+  Svg.prototype.ellipse = function (x, y, radiusX, radiusY, style) {
     this.elements.push({
       tag: 'ellipse',
       attribute: {
@@ -50,7 +50,7 @@ export default (function () {
     return this;
   }
 
-  svg.prototype.line = function (x1, y1, x2, y2, style) {
+  Svg.prototype.line = function (x1, y1, x2, y2, style) {
     this.elements.push({
       tag: 'line',
       attribute: {
@@ -64,7 +64,7 @@ export default (function () {
     return this;
   }
 
-  svg.prototype.polygon = function (points, style) {
+  Svg.prototype.polygon = function (points, style) {
     if (points != null && points.length > 0) {
       var pList = [], point;
       for (var i = 0, len = points.length; i < len; ++i) {
@@ -82,7 +82,7 @@ export default (function () {
     return this;
   }
 
-  svg.prototype.polyline = function (points, style) {
+  Svg.prototype.polyline = function (points, style) {
     if (points != null && points.length > 0) {
       var pList = [], point;
       for (var i = 0, len = points.length; i < len; ++i) {
@@ -99,7 +99,7 @@ export default (function () {
     }
   }
 
-  svg.prototype.beginPath = function (style) {
+  Svg.prototype.beginPath = function (style) {
     if (this.context.curPath !== null) {
       this.elements.push({
         tag: 'path',
@@ -115,62 +115,62 @@ export default (function () {
     };
   }
 
-  svg.prototype.moveTo = function (x, y) {
+  Svg.prototype.moveTo = function (x, y) {
     var arr = [x, y];
     this.context.curPath.commands.push('M' + arr.join(' '));
   }
 
-  svg.prototype.lineTo = function (x, y) {
+  Svg.prototype.lineTo = function (x, y) {
     var arr = [x, y];
     this.context.curPath.commands.push('L' + arr.join(' '));
   }
 
-  svg.prototype.horizontalLineTo = function (x) {
+  Svg.prototype.horizontalLineTo = function (x) {
     this.context.curPath.commands.push('H' + x);
   }
 
-  svg.prototype.verticalLineTo = function (y) {
+  Svg.prototype.verticalLineTo = function (y) {
     this.context.curPath.commands.push('V' + y);
   }
 
-  svg.prototype.curveTo = function (x1, y1, x2, y2, x, y) {
+  Svg.prototype.curveTo = function (x1, y1, x2, y2, x, y) {
     var arr = [x1, y1, x2, y2, x, y0];
     this.context.curPath.commands.push('C' + arr.join(' '));
   }
 
-  svg.prototype.smoothCurveTo = function (x2, y2, x, y) {
+  Svg.prototype.smoothCurveTo = function (x2, y2, x, y) {
     var arr = [x2, y2, x, y];
     this.context.curPath.commands.push('S' + arr.join(' '));
   }
 
 
-  svg.prototype.quadraticBelzierCurveTo = function (x1, y1, x, y) {
+  Svg.prototype.quadraticBelzierCurveTo = function (x1, y1, x, y) {
     var arr = [x1, y1, x, y];
     this.context.curPath.commands.push('Q' + arr.join(' '));
   }
 
-  svg.prototype.smoothQuadraticBelzierCurveTo = function (x, y) {
+  Svg.prototype.smoothQuadraticBelzierCurveTo = function (x, y) {
     var arr = [x, y];
     this.context.curPath.commands.push('T' + arr.join(' '));
   }
 
-  svg.prototype.ellipticalArcTo = function (radiusX, radiusY, xAxisRotation, largeArcFlag, sweepFlag, x, y) {
+  Svg.prototype.ellipticalArcTo = function (radiusX, radiusY, xAxisRotation, largeArcFlag, sweepFlag, x, y) {
     var arr = [radiusX, radiusY, xAxisRotation, largeArcFlag, sweepFlag, x, y]
     this.context.curPath.commands.push('A' + arr.join(' '));
   }
 
-  svg.prototype.closePath = function () {
+  Svg.prototype.closePath = function () {
     if (this.context.curPath !== null) {
       this.context.curPath.commands.push('Z');
     }
   }
   
-  svg.prototype.clear = function () {
+  Svg.prototype.clear = function () {
     this.elements = [];
     this.context = {curPath: null};
   }
   
-  svg.prototype.toXmlString = function (withSvgTag) {
+  Svg.prototype.toXmlString = function (withSvgTag) {
     var nodes = [], elements = this.elements;
     for (var i = 0, len = elements.length; i < len; ++i) {
       var element = elements[i];
@@ -213,7 +213,5 @@ export default (function () {
     }
   }
 
-  return {
-    svg: svg
-  }
+  return Svg
 })();
